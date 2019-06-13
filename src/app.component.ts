@@ -1,9 +1,9 @@
 import { AppService } from './app.service';
-import * as Core from './core';
+import * as Vuegular from './core';
 
 export class VueComponent {}
 
-@Core.VueComponent({})
+@Vuegular.VueComponent({})
 export class AppComponent extends VueComponent {
     private hi: string = `asd`;
     constructor (private appService: AppService) { super(); }

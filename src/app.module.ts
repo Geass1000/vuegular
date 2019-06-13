@@ -1,10 +1,10 @@
 import { CorreModule } from './core.module';
 import { AppComponent } from './app.component';
-import { VueModule } from './core';
+import * as Vuegular from './core';
 
-@VueModule({
+@Vuegular.VueModule({
     modules: [ CorreModule ],
     providers: [ AppComponent ],
-    components: [ AppComponent ],
+    bootstrap: [ AppComponent ],
 })
 export class AppModule {}

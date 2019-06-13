@@ -1,6 +1,6 @@
-import { VueModule } from './core';
+import * as Vuegular from './core';
 
-@VueModule({
+@Vuegular.VueModule({
     modules: [],
     providers: [],
     components: [],

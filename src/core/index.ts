@@ -1,5 +1,3 @@
 import "reflect-metadata";
 
-export * from './vue-module.decorator';
-export * from './vue-component.decorator';
-export * from './vue-service.decorator';
+export * from './decorators';

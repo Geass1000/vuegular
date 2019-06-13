@@ -1,6 +1,6 @@
-import * as Core from './core';
+import * as Vuegular from './core';
 
-@Core.VueService()
+@Vuegular.VueService()
 export class AppService {
 }
 
