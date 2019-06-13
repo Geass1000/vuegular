@@ -1,4 +1,4 @@
-import * as Interfaces from './interfaces';
+import * as Interfaces from '../interfaces';
 
 export function VueComponent (config: Interfaces.VueComponent) {
     // Gets Vue lifecycle hooks
