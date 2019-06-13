@@ -1,3 +1,4 @@
+import { VuegularHelper } from '../vuegular.helper';
 import * as Interfaces from '../interfaces';
 
 export function VueComponent (config: Interfaces.VueComponent) {
@@ -7,6 +8,8 @@ export function VueComponent (config: Interfaces.VueComponent) {
     // Gets computed props
 
     return <T extends {new(...args:any[]):{}}> (Component: T) => {
+        VuegularHelper.setElementConfig(config, Component);
+
         console.log(Component);
         Object.getOwnPropertyNames(Component.prototype).forEach((key) => {
             const descriptor = Object.getOwnPropertyDescriptor(Component.prototype, key);
