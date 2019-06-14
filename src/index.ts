@@ -1,7 +1,6 @@
-import { AppModule } from './app.module';
+import { VgApp } from './core/vg.app';
+import { AppComponent } from './example/app.component';
+import { DIContainer } from './core/di/di-container';
+import { AppModule } from './example/app.module';
 
-new AppModule();
-
-class Test {
-	constructor (private hello: string) {}
-}
+VgApp.getInstance().bootstrapModule(AppModule);
