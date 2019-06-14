@@ -1,5 +1,5 @@
 
-export class VueApp {
+export class VgApp {
     constructor () { ; }
 
     public bootstrapModule (moduleClass: any) {
