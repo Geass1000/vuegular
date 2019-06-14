@@ -17,7 +17,7 @@ export class DIContainer extends Singleton {
             };
 
         if (elData.type !== DIElementDataType.Class) {
-            throw new Error (`DI Element must have a class type!`);
+            throw new Error (`DI Element (${elKey}) must have a class type!`);
         }
 
         const classParams: any[] = Reflect.getMetadata(`design:paramtypes`, elKey);
@@ -55,45 +55,47 @@ export class DIContainer extends Singleton {
             elOpts: Interfaces.DIElement.Options): void {
         let elData = this.getElementData(elKey);
 
+        // Checking: Is there a `single` value in DI Storage? `Yes` - throw error.
         if (!elOpts.multi && !_.isUndefined(elData)) {
             throw new Error(`DI Data for ${elKey} already exists!`);
         }
 
-        if (elOpts.multi && _.isUndefined(elData)) {
-            elData = [];
-        }
-
+        // Creates a new DI Data for the DI Element by element type.
         let elDataValue: Interfaces.DIElement.Data;
         switch (elOpts.type) {
-            case DIElementDataType.Ref: elDataValue = {
+            case DIElementDataType.Ref:
+                elDataValue = {
                     type: DIElementDataType.Ref,
                     key: elValue,
-                }; break;
-            case DIElementDataType.Value: elDataValue = {
+                };
+                break;
+            case DIElementDataType.Value:
+                elDataValue = {
                     type: DIElementDataType.Value,
                     value: elValue,
-                }; break;
+                };
+                break;
             default:
                 throw new Error(`Unknown type of the DI Provider!`);
         }
 
+        // Checking: Is there a new DI Value in DI Data? `Yes` - throw error.
         if (elOpts.multi) {
-            const foundElData = _.find(elData as Interfaces.DIElement.Data[], (value) => {
-                return (value.type === DIElementDataType.Ref
-                    && value.key === (elDataValue as Interfaces.DIElement.Data.Ref).key)
-                    || (value.type === DIElementDataType.Value
-                    && value.value === (elDataValue as Interfaces.DIElement.Data.Value).value);
+            const foundElData = _.find(elData, (value: Interfaces.DIElement.Data) => {
+                return (value.type === DIElementDataType.Ref && value.key === elValue)
+                    || (value.type === DIElementDataType.Value && value.value === elValue);
             });
 
             if (!_.isUndefined(foundElData)) {
-                throw new Error (`DI Provider (${elKey}) is already registered`);
+                throw new Error (`There is a ${elValue} value in the DI Provider (${elKey})!`);
             }
         }
 
-        const newElData = elOpts.multi
-            ? [ ...elData as Interfaces.DIElement.Data[], elDataValue ] as Interfaces.DIElement.Data[]
-            : elDataValue as Interfaces.DIElement.Data;
+        // Sets or adds a new DI Value to the DI Data
+        const newElData: Interfaces.DIElement.Data | Interfaces.DIElement.Data[] = elOpts.multi
+            ? _.concat(elData || [], elDataValue) : elDataValue;
 
+        // Sets a new DI Data
         this.setElementData(elKey, newElData);
     }
 
