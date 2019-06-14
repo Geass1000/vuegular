@@ -3,13 +3,13 @@
 	    "module": "commonjs",
 	    "declaration": false,
 	    "outDir": "./lib",
-			"baseUrl": "src",
+		"baseUrl": "src",
 	    "sourceMap": true,
 
 	    "strict": true,
 	    "noImplicitAny": true,
 	    "moduleResolution": "node",
-			"target": "es6",
+		"target": "es6",
 	    "typeRoots": [ "node_modules/@types" ],
 
 	    "experimentalDecorators": true,
