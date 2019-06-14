@@ -1,6 +1,6 @@
 import * as Vuegular from './core';
 
-@Vuegular.VueModule({
+@Vuegular.VgModule({
     modules: [],
     providers: [],
     components: [],

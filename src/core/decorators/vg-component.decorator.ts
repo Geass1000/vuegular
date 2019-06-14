@@ -1,14 +1,14 @@
-import { VuegularHelper } from '../vuegular.helper';
+import { VgHelper } from '../vg.helper';
 import * as Interfaces from '../interfaces';
 
-export function VueComponent (config: Interfaces.VueComponent) {
+export function VgComponent (config: Interfaces.VueComponent) {
     // Gets Vue lifecycle hooks
     // Gets methods
     // Gets mixins
     // Gets computed props
 
     return <T extends {new(...args:any[]):{}}> (Component: T) => {
-        VuegularHelper.setElementConfig(config, Component);
+        VgHelper.setElementConfig(config, Component);
 
         console.log(Component);
         Object.getOwnPropertyNames(Component.prototype).forEach((key) => {

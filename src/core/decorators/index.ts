@@ -1,3 +1,3 @@
-export * from './vue-module.decorator';
-export * from './vue-component.decorator';
-export * from './vue-service.decorator';
+export * from './vg-module.decorator';
+export * from './vg-component.decorator';
+export * from './vg-service.decorator';

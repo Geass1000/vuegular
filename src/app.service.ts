@@ -1,6 +1,6 @@
 import * as Vuegular from './core';
 
-@Vuegular.VueService()
+@Vuegular.VgService()
 export class AppService {
 }
 

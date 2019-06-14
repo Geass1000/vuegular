@@ -1,5 +1,5 @@
 
-export class VuegularHelper {
+export class VgHelper {
     static setElementConfig<T> (config: T, target: any) {
         Reflect.defineMetadata(`vuegular:config`, config, target);        
     }
