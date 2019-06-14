@@ -104,6 +104,45 @@ export class DIContainer extends Singleton {
         this.setElementData(elKey, newElData);
     }
 
+    /**
+     * Returns a instance of DI Element with all dependencies. 
+     *
+     * @param  {Interfaces.DIElement.Key} diKey - key of the DI Element
+     * @returns T
+     */
+    public get<T> (diKey: Interfaces.DIElement.Key): T {
+        const elData = this.getElementData(diKey);
+
+        // Checking: Is there a DI Element in DI Storage? `No` - throw error.
+        if (_.isUndefined(elData)) {
+            throw new Error(`There is not a DI Element (${diKey}) in the DI Storage!`);
+        }
+
+        // If DI Element has a `multi` DI Data, then
+        // `get` method will create instance of each element (from DI Data) and will return the array
+        if (_.isArray(elData)) {
+            const instances: T = _.map(elData as Interfaces.DIElement.Data[], (value) =>
+                this.get<any>(value)) as any;
+            return instances;
+        }
+
+        // If DI Element has a `single` DI Data, then method will check the data type of a DI Element
+        switch (elData.type) {
+            case DIElementDataType.Class:
+                // If data type is `class`, then method will call itself for each param of a DI Element
+                // and will create instance of a DI Element with them
+                const params: any[] = _.map(elData.params, (param) => this.get(param));
+                // return new diKey(...params); // It is the same as below
+                return new (Function.prototype.bind.apply(diKey, [null, ...params]));
+            case DIElementDataType.Ref:
+                // If data type is `ref`, then method will recall itself with another DI Element
+                return this.get(elData.key);
+            case DIElementDataType.Value:
+                // If data type is `value`, then method will return a `value` from DI Data
+                return elData.value;
+        }
+    }
+
     private getElementData (elKey: Interfaces.DIElement.Key): Interfaces.DIElement.Data
             | Interfaces.DIElement.Data[] | undefined {
         return this.elStorage.get(elKey);
