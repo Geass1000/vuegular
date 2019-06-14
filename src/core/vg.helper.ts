@@ -5,6 +5,6 @@ export class VgHelper {
     }
 
     static getElementConfig (target: any): any {
-        Reflect.getMetadata(`vuegular:config`, target);        
+        return Reflect.getMetadata(`vuegular:config`, target);        
     }
 }
