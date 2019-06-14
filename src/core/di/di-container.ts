@@ -55,9 +55,14 @@ export class DIContainer extends Singleton {
             elOpts: Interfaces.DIElement.Options): void {
         let elData = this.getElementData(elKey);
 
+        // Checking: Is a user trying to set a `single` vaule in the multi DI Data? `Yes` - throw error.
+        if (!elOpts.multi && _.isArray(elData)) {
+            throw new Error(`DI Data (${elKey}) is a multi dependency!`);
+        }
+
         // Checking: Is there a `single` value in DI Storage? `Yes` - throw error.
         if (!elOpts.multi && !_.isUndefined(elData)) {
-            throw new Error(`DI Data for ${elKey} already exists!`);
+            throw new Error(`DI Data (${elKey}) already exists!`);
         }
 
         // Creates a new DI Data for the DI Element by element type.
