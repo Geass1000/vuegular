@@ -1,3 +1,4 @@
+import { DIContainer } from './../di/di-container';
 import { VgHelper } from '../vg.helper';
 import * as Interfaces from '../interfaces';
 
@@ -8,6 +9,7 @@ export function VgComponent (config: Interfaces.VueComponent) {
     // Gets computed props
 
     return <T extends {new(...args:any[]):{}}> (Component: T) => {
+        DIContainer.getInstance().bindClass(Component);
         VgHelper.setElementConfig(config, Component);
 
         console.log(Component);
