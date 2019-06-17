@@ -6,7 +6,7 @@ export class DITreeProvider<T, V> {
         return this._parent;
     }
 
-    protected providers!: DITreeProvider<T, V>[];
+    protected providers!: DITreeProvider<any, any>[];
     protected value!: V;
 
     constructor (
@@ -21,10 +21,10 @@ export class DITreeProvider<T, V> {
     /**
      * Sets the list of node of providers.
      * 
-     * @param  {any[]} providers
+     * @param  {DITreeProvider<any,any>[]} providers
      * @returns void
      */
-    public setProviders (providers: any[]): void {
+    public setProviders (providers: DITreeProvider<any, any>[]): void {
         this.providers = [ ...providers ];
     }
 
