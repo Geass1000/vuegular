@@ -17,20 +17,6 @@ export class DITreeModule<T, V> extends DITreeProvider<T, V> {
      * @returns void
      */
     public setModules (modules: any[]): void {
-        this.modules = [];
-        _.forEach(modules, (module) => {
-            const node = new DITreeModule<any, any>(module);
-            this.addChildModule(node);
-        });
-    }
-
-    /**
-     * Adds a module to the module list.
-     * 
-     * @param  {DITreeModule<T, V>} child
-     * @returns void
-     */
-    private addChildModule (child: DITreeModule<T, V>): void {
-        this.modules.push(child);
+        this.modules = [ ...modules ];
     }
 }

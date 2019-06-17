@@ -25,11 +25,7 @@ export class DITreeProvider<T, V> {
      * @returns void
      */
     public setProviders (providers: any[]): void {
-        this.providers = [];
-        _.forEach(providers, (provider) => {
-            const node = new DITreeProvider<any, any>(provider);
-            this.addChildProvider(node);
-        });
+        this.providers = [ ...providers ];
     }
 
     /**
@@ -72,16 +68,5 @@ export class DITreeProvider<T, V> {
      */
     public isProvider (provider: T): boolean {
         return this.type === provider;
-    }
-
-    /**
-     * Adds a provider to the provider list.
-     *
-     * @param  {DITreeProvider<T} child
-     * @param  {} V>
-     * @returns void
-     */
-    protected addChildProvider (child: DITreeProvider<T, V>): void {
-        this.providers.push(child);
     }
 }
