@@ -1,8 +1,8 @@
 import { DIContainer } from './../di/di-container';
 import { VgHelper } from '../vg.helper';
-import * as Interfaces from '../interfaces';
+import * as VgInterfaces from '../vg.interfaces';
 
-export function VgComponent (config: Interfaces.VueComponent) {
+export function VgComponent (config: VgInterfaces.VgComponent) {
     // Gets Vue lifecycle hooks
     // Gets methods
     // Gets mixins
