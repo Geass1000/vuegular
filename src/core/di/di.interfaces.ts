@@ -1,6 +1,10 @@
-import { DIElementDataType } from './di.enums';
+import { DIElementDataType, DITreeNodeType } from './di.enums';
 import { DIToken } from './di-token';
 
+export interface DITreeNodeData {
+    type: DITreeNodeType;
+    value: any;
+}
 
 export namespace DIElement {
     export type Key = DIToken | any;
