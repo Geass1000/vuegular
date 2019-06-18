@@ -62,21 +62,23 @@ export class DITree extends Singleton {
         const componentNodes = _.map(cmps, (cmp) => this.visitProvider(node, {
             type: DiEnums.DITreeNodeType.Component, value: cmp }));
         
-        // Sets a parent of `current` module and his children
-        node.setParent(parentModule);
+        // Sets children of `current` module
         node.addChildren(moduleNodes);
         node.addChildren(providerNodes);
         node.addChildren(componentNodes);
 
-        // If module is local, fn will return DITN of `current` module
+        // If module is `global`, fn will add `current` module to global list
+        // and set parent of `current` module to `null` and return `null`.  
         if (!moduleConfig.global) {
-            return node;
+            node.setParent(null);
+            this.addGlobalNode(node);
+            return null; 
         }
         
-        // Else fn will add `current` module to global list
-        // and retuns `null`.  
-        this.addGlobalNode(node);
-        return null;
+        // Else fn will set a parent of `current` module
+        // and return DITN of `current` module
+        node.setParent(parentModule);
+        return node;
     }
 
     /**
