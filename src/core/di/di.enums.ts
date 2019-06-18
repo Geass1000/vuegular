@@ -4,3 +4,9 @@ export enum DIElementDataType {
     Ref = 'ref',
     Value = 'value',
 }
+
+export enum DITreeNodeType {
+    Provider = 'provider',
+    Component = 'component',
+    Module = 'module'
+}
