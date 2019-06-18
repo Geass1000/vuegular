@@ -6,7 +6,8 @@
 		"baseUrl": "src",
 	    "sourceMap": true,
 
-	    "strict": true,
+		"strict": true,
+		"strictNullChecks": false,
 	    "noImplicitAny": true,
 	    "moduleResolution": "node",
 		"target": "es6",
