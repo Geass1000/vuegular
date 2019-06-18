@@ -5,6 +5,5 @@ import * as Vuegular from '../../../core';
 @Vuegular.VgModule({
     modules: [],
     providers: [ AuthService ],
-    components: [],
 })
 export class AuthModule {}
